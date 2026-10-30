@@ -1,7 +1,11 @@
 const cors = require('cors');
 const app = require('./app');
+const express = require('express');
 
 
+
+
+app.use(express.json());
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -15,7 +19,5 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
-
-app.use(express.json());
 
 app.listen(3000, () => console.log('API sur http://localhost:3000'));
