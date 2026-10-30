@@ -4,7 +4,7 @@ const HttpError = require('../utils/HttpError');
 
 const cookieOptions = {
   httpOnly: true,
-  sameSite: 'lax',
+  sameSite: env.IS_PROD ? 'none' : 'lax',
   secure: env.IS_PROD,
   maxAge: 3600_000,
 };
@@ -28,6 +28,10 @@ exports.me = async (req, res) => {
 };
 
 exports.logout = (req, res) => {
-  res.clearCookie('token');
+  res.clearCookie('token', {
+  httpOnly: true,
+  sameSite: env.IS_PROD ? 'none' : 'lax',
+  secure: env.IS_PROD,
+});
   res.json({ ok: true });
 };
