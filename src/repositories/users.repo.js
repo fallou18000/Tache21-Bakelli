@@ -2,12 +2,23 @@ const { query } = require('../config/db');
 
 exports.findByEmail = async (email) => {
   const { rows } = await query(
-    `SELECT u.id, u.nom, u.email, u.mot_de_passe, u.entreprise_id, r.nom AS role
+    `SELECT 
+        u.id,
+        u.nom,
+        u.email,
+        u.mot_de_passe,
+        d.entreprise_id,
+        r.nom AS role
      FROM users u
      JOIN role r ON r.id = u.role_id
+     JOIN equipe e ON e.id = u.equipe_id
+     JOIN departement d ON d.id = e.departement_id
      WHERE u.email = $1`,
     [email.toLowerCase().trim()]
   );
+
+  console.log("USER TROUVE PAR NODE :", rows[0]);
+
   return rows[0];
 };
 
