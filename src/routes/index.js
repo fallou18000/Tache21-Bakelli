@@ -17,5 +17,6 @@ router.use('/activites', require('./activites.routes'));
 router.use('/relances', require('./relances.routes'));
 router.use('/objectifs', require('./objectifs.routes'));
 router.use('/rapports', require('./rapports.routes'));
+router.use('/parametres', require('./parametres.routes'));
 
 module.exports = router;
